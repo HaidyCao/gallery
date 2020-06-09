@@ -6,6 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:gallery/image_detail.dart';
+
 class Images extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -52,23 +54,16 @@ class _ImagesPage extends State<Images> {
           fit: BoxFit.cover,
           cacheWidth: width * pixelRatio.toInt(),
         );
-        return Stack(
-          children: <Widget>[
-            image,
-            InkWell(
-              onTap: () {
-                debugPrint(_data[index].path);
-              },
-            ),
-          ],
-        );
-//        return GridTile(
-//            child: GestureDetector(
-//          child: image,
-//          onTap: () {
-//            debugPrint(_data[index].path);
-//          },
-//        ));
+        return GridTile(
+            child: GestureDetector(
+          child: image,
+          onTap: () {
+            debugPrint(_data[index].path);
+            Navigator.of(context).push(new MaterialPageRoute(builder: (_) {
+              return ImageDetail(_data[index].path);
+            }));
+          },
+        ));
       },
     );
   }

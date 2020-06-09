@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:gallery/images.dart';
 
@@ -84,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Icons.video_library,
                 color: Colors.pinkAccent,
               ),
-              title: Text("Images"),
+              title: Text("Video"),
               onTap: showVideos,
             ),
             Divider(

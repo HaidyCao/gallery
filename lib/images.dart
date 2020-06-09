@@ -30,7 +30,9 @@ class _ImagesPage extends State<Images> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var mediaQueryData = MediaQuery.of(context);
+    var size = mediaQueryData.size;
+    var pixelRatio = mediaQueryData.devicePixelRatio;
 
     double spacing = 4;
     int count = size.width ~/ 120;
@@ -48,10 +50,25 @@ class _ImagesPage extends State<Images> {
         var image = Image.file(
           File(_data[index].path),
           fit: BoxFit.cover,
-          cacheWidth: width,
-          cacheHeight: width,
+          cacheWidth: width * pixelRatio.toInt(),
         );
-        return GridTile(child: image);
+        return Stack(
+          children: <Widget>[
+            image,
+            InkWell(
+              onTap: () {
+                debugPrint(_data[index].path);
+              },
+            ),
+          ],
+        );
+//        return GridTile(
+//            child: GestureDetector(
+//          child: image,
+//          onTap: () {
+//            debugPrint(_data[index].path);
+//          },
+//        ));
       },
     );
   }
